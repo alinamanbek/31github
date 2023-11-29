@@ -49,13 +49,4 @@ class ApplicantSerializer(serializers.ModelSerializer):
     class Meta:
         model = Applicant
         fields = '__all__'
-
-class GradeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Grade
-        fields = '__all__'
-
-class NewsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = News
-        fields = '__all__'
+ 
