@@ -67,3 +67,15 @@ class News(models.Model):
         return self.title
 
 # Add other models as needed based on your project requirements
+from django.db import models
+
+class Lesson(models.Model):
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
+    class_assigned = models.ForeignKey(Class, on_delete=models.CASCADE)
+    lesson_date = models.DateField()
+    lesson_time = models.TimeField()
+    location = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f"{self.subject.subject_name} - {self.lesson_date} - {self.lesson_time}"
