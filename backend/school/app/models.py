@@ -79,3 +79,27 @@ class Lesson(models.Model):
 
     def __str__(self):
         return f"{self.subject.subject_name} - {self.lesson_date} - {self.lesson_time}"
+
+
+
+from django.db import models
+
+class Schedule(models.Model):
+    class_assigned = models.ForeignKey(Class, on_delete=models.CASCADE)
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
+    day_of_week_choices = (
+        ('monday', 'Monday'),
+        ('tuesday', 'Tuesday'),
+        ('wednesday', 'Wednesday'),
+        ('thursday', 'Thursday'),
+        ('friday', 'Friday'),
+        ('saturday', 'Saturday'),
+        ('sunday', 'Sunday'),
+    )
+    day_of_week = models.CharField(max_length=10, choices=day_of_week_choices)
+    lesson_time = models.TimeField()
+    location = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f"{self.class_assigned.class_name} - {self.subject.subject_name} - {self.teacher.user_account.user.username} - {self.day_of_week} - {self.lesson_time}"
