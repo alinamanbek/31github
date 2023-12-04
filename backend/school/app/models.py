@@ -103,3 +103,12 @@ class Schedule(models.Model):
 
     def __str__(self):
         return f"{self.class_assigned.class_name} - {self.subject.subject_name} - {self.teacher.user_account.user.username} - {self.day_of_week} - {self.lesson_time}"
+from django.db import models
+from django.contrib.auth.models import User
+
+class Director(models.Model):
+    user_account = models.OneToOneField(UserAccount, on_delete=models.CASCADE)
+    # Add other director-related fields
+
+    def __str__(self):
+        return self.user_account.user.username
