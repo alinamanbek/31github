@@ -112,3 +112,23 @@ class Director(models.Model):
 
     def __str__(self):
         return self.user_account.user.username
+# models.py
+
+from django.db import models
+from django.contrib.auth.models import User
+
+class Teacher(models.Model):
+    user_account = models.OneToOneField(UserAccount, on_delete=models.CASCADE)
+    subjects_taught = models.ManyToManyField(Subject)
+    # Add other fields specific to teachers
+
+    def __str__(self):
+        return self.user_account.user.username
+
+class TeacherModule(models.Model):
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
+    module_name = models.CharField(max_length=50)
+    description = models.TextField()
+
+    def __str__(self):
+        return f"{self.teacher.user_account.user.username} - {self.module_name}"
