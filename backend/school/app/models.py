@@ -132,3 +132,16 @@ class TeacherModule(models.Model):
 
     def __str__(self):
         return f"{self.teacher.user_account.user.username} - {self.module_name}"
+from django.db import models
+from django.contrib.auth.models import User
+
+class Homework(models.Model):
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
+    class_assigned = models.ForeignKey(Class, on_delete=models.CASCADE)
+    due_date = models.DateField()
+    description = models.TextField()
+    # You can add more fields based on your requirements, such as file uploads, etc.
+
+    def __str__(self):
+        return f"{self.subject.subject_name} - {self.due_date} - {self.teacher.user_account.user.username}"
