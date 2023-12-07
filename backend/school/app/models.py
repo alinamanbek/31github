@@ -145,3 +145,12 @@ class Homework(models.Model):
 
     def __str__(self):
         return f"{self.subject.subject_name} - {self.due_date} - {self.teacher.user_account.user.username}"
+from django.db import models
+from django.contrib.auth.models import User
+
+class Parent(models.Model):
+    user_account = models.OneToOneField(UserAccount, on_delete=models.CASCADE)
+    # Add other parent-related fields
+
+    def __str__(self):
+        return self.user_account.user.username
