@@ -154,3 +154,19 @@ class Parent(models.Model):
 
     def __str__(self):
         return self.user_account.user.username
+from django.db import models
+from django.contrib.auth.models import User
+
+class Homework(models.Model):
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
+    class_assigned = models.ForeignKey(Class, on_delete=models.CASCADE)
+    due_date = models.DateField()
+    description = models.TextField()
+    # Additional fields for homework
+    additional_notes = models.TextField(blank=True, null=True)
+    is_published = models.BooleanField(default=True)
+    # You can add more fields based on your requirements, such as file uploads, etc.
+
+    def __str__(self):
+        return f"{self.subject.subject_name} - {self.due_date} - {self.teacher.user_account.user.username}"
