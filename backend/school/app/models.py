@@ -170,3 +170,15 @@ class Homework(models.Model):
 
     def __str__(self):
         return f"{self.subject.subject_name} - {self.due_date} - {self.teacher.user_account.user.username}"
+from django.db import models
+from django.contrib.auth.models import User
+
+class AbsentList(models.Model):
+    class_assigned = models.ForeignKey(Class, on_delete=models.CASCADE)
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
+    date = models.DateField()
+    absent_students = models.ManyToManyField(Student, blank=True)
+
+    def __str__(self):
+        return f"{self.class_assigned.class_name} - {self.subject.subject_name} - {self.date}"
