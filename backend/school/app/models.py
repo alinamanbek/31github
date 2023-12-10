@@ -182,3 +182,14 @@ class AbsentList(models.Model):
 
     def __str__(self):
         return f"{self.class_assigned.class_name} - {self.subject.subject_name} - {self.date}"
+from django.db import models
+from django.contrib.auth.models import User
+
+class FinishedHomework(models.Model):
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    homework = models.ForeignKey(Homework, on_delete=models.CASCADE)
+    completion_date = models.DateField(auto_now_add=True)
+    is_approved = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.student.user_account.user.username} - {self.homework.subject.subject_name} - {self.completion_date} - Approved: {self.is_approved}"
