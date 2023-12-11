@@ -193,3 +193,27 @@ class FinishedHomework(models.Model):
 
     def __str__(self):
         return f"{self.student.user_account.user.username} - {self.homework.subject.subject_name} - {self.completion_date} - Approved: {self.is_approved}"
+from django.db import models
+from django.contrib.auth.models import User
+
+class Exam(models.Model):
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
+    class_assigned = models.ForeignKey(Class, on_delete=models.CASCADE)
+    date = models.DateField()
+    start_time = models.TimeField()
+    end_time = models.TimeField()
+    location = models.CharField(max_length=100)
+    max_marks = models.PositiveIntegerField()
+    # You can add more fields based on your requirements
+
+    def __str__(self):
+        return f"{self.subject.subject_name} Exam - {self.date}"
+
+class ExamResult(models.Model):
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    exam = models.ForeignKey(Exam, on_delete=models.CASCADE)
+    obtained_marks = models.PositiveIntegerField()
+    # You can add more fields based on your requirements
+
+    def __str__(self):
+        return f"{self.student.user_account.user.username} - {self.exam.subject.subject_name} Exam - Marks: {self.obtained_marks}"
