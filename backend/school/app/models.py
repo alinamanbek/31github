@@ -42,6 +42,29 @@ class Student(models.Model):
 
     def __str__(self):
         return self.user_account.user.username
+    
+    
+    def send_sms_notification(self, message):
+        # Your Twilio Account SID and Auth Token
+        account_sid = 'your_account_sid'
+        auth_token = 'your_auth_token'
+        twilio_phone_number = 'your_twilio_phone_number'
+
+        # Create a Twilio client
+        client = Client(account_sid, auth_token)
+
+        # Student's phone number (replace with your actual logic to get the phone number)
+        student_phone_number = 'student_phone_number'
+
+        # Send SMS
+        message = client.messages.create(
+            body=message,
+            from_=twilio_phone_number,
+            to=student_phone_number
+        )
+
+        return message.sid
+
 
 class Applicant(models.Model):
     user_account = models.OneToOneField(UserAccount, on_delete=models.CASCADE)
