@@ -240,3 +240,15 @@ class ExamResult(models.Model):
 
     def __str__(self):
         return f"{self.student.user_account.user.username} - {self.exam.subject.subject_name} Exam - Marks: {self.obtained_marks}"
+from django.db import models
+from django.contrib.auth.models import User
+
+class Methodology(models.Model):
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
+    title = models.CharField(max_length=100)
+    description = models.TextField()
+    file = models.FileField(upload_to='methodologies/', blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.subject.subject_name} - {self.teacher.user_account.user.username} - {self.title}"
