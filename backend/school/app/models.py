@@ -252,3 +252,16 @@ class Methodology(models.Model):
 
     def __str__(self):
         return f"{self.subject.subject_name} - {self.teacher.user_account.user.username} - {self.title}"
+# serializers.py
+from rest_framework import serializers
+from .models import Subject, Class
+
+class SubjectSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Subject
+        fields = '__all__'
+
+class ClassSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Class
+        fields = '__all__'
