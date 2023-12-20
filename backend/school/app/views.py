@@ -23,3 +23,15 @@ class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
     permission_classes = [permissions.IsAuthenticated]
+# views.py
+from rest_framework import viewsets, permissions
+from .models import Parent
+from .serializers import ParentSerializer
+
+class ParentViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows parents to be viewed or edited.
+    """
+    queryset = Parent.objects.all()
+    serializer_class = ParentSerializer
+    permission_classes = [permissions.IsAuthenticated]
