@@ -35,3 +35,15 @@ class ParentViewSet(viewsets.ModelViewSet):
     queryset = Parent.objects.all()
     serializer_class = ParentSerializer
     permission_classes = [permissions.IsAuthenticated]
+# views.py
+from rest_framework import viewsets, permissions
+from .models import Homework
+from .serializers import HomeworkSerializer
+
+class HomeworkViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows homework to be viewed or edited.
+    """
+    queryset = Homework.objects.all()
+    serializer_class = HomeworkSerializer
+    permission_classes = [permissions.IsAuthenticated]
